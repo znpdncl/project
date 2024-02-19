@@ -1,0 +1,50 @@
+class Library:
+    def __init__(self):
+        self.file = open("books.txt","a+")
+    def __init__(self, isim, yazar, yil, sayfa):
+        self.isim = isim
+        self.yazar = yazar
+        self.yil = yil
+        self.sayfa = sayfa
+
+    def splitlines(self):
+        return f"{self.isim}, {self.yazar}, {self.yil}, {self.sayfa}".splitlines()
+
+    def kitap_ekle(self, kitap_listesi):
+        isim = input("İsmini girin: ")
+        yazar = input("Yazarını girin: ")
+        yil = input("Basım yılını girin: ")
+        sayfa = input("Sayfa sayısını girin: ")
+        kitap = Library(isim, yazar, yil, sayfa)
+        kitap_listesi.append(kitap)
+        print("Kitap başarıyla eklendi.")
+
+kitap_listesi = [Library("Çalıkuşu", "Reşat Nuri Güntekin", "1923", "544")]
+
+while True:
+    print("1. Kitap listesi")
+    print("2. Yeni kitap ekle")
+    print("3. Kitap sil")
+    print("4. Çıkış yap")
+    
+    secim = input("Lütfen yapmak istediğiniz işlemi seçin (1-4): ")
+    
+    if secim == "1":
+        print("Kitap Listesi:")
+        for kitap in kitap_listesi:
+            print(kitap.splitlines())
+    elif secim == "2":
+        kitap = Library("", "", "", "")
+        kitap.kitap_ekle(kitap_listesi)
+    elif secim == "3":
+        silinecek_isim = input("Silmek istediğiniz kitabın ismini girin: ")
+        for kitap in kitap_listesi:
+            if kitap.isim == silinecek_isim:
+                kitap_listesi.remove(kitap)
+                print("Kitap başarıyla silindi.")
+                break
+    elif secim == "4":
+        print("Programdan çıkılıyor.")
+        break
+    else:
+        print("Geçersiz bir seçenek girdiniz.")
